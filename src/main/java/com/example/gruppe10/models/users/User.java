@@ -1,15 +1,33 @@
 package com.example.gruppe10.models.users;
 
+
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
+
+@Entity
+// siger vi for at lægge alle User-klasser i én tabel
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
+@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames={"id_user","email"}))
+
 public class User {
     // attributter
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @Column(name="id_user")
     private int id;
+    @NotNull
     private int type;
+    @NotNull
     private String name;
+    @NotNull
     private String email;
+    @NotNull
     private String password;
 
     // constructors
-
     public User() {
     }
 

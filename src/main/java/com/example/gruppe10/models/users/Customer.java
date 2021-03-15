@@ -1,19 +1,27 @@
 package com.example.gruppe10.models.users;
 
 import com.example.gruppe10.models.Booking;
+import com.sun.istack.NotNull;
 
-import java.util.ArrayList;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
+@Entity
+@DiscriminatorValue("Customer")
 public class Customer extends User{
-    private ArrayList<Booking> bookingList;
+
+    @OneToMany(mappedBy = "customer") // customer == den attribut vi har lavet i Booking-klassen
+    private Set<Booking> bookingList;
     
     //Constructor
     public Customer() {
         super();
     }
     
-    public Customer(int id, int type, String name, String email, String password,ArrayList<Booking> bookingList){
-        super(id, type, name, email, password);
+    public Customer(int id, String name, String email, String password,Set<Booking> bookingList){
+        super(id, 1, name, email, password);
         this.bookingList = bookingList;
     }
     
@@ -25,10 +33,10 @@ public class Customer extends User{
     }
     
     //Getters og setters
-    public ArrayList<Booking> getBookingList() {
+    public Set<Booking> getBookingList() {
         return bookingList;
     }
-    public void setBookingList(ArrayList<Booking> bookingList) {
+    public void setBookingList(Set<Booking> bookingList) {
         this.bookingList = bookingList;
     }
     
