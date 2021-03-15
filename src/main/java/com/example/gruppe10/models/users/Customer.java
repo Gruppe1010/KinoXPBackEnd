@@ -21,6 +21,10 @@ public class Customer extends User{
     public Customer() {
         super();
     }
+
+    public Customer(int id) {
+        super(id);
+    }
     
     public Customer(int id, String name, String email, String password,Set<Booking> bookingList){
         super(id, name, email, password);

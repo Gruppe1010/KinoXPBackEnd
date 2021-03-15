@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(value = "*")
 public class CustomerRESTController {
@@ -26,11 +28,22 @@ public class CustomerRESTController {
     @PostMapping(value="/customers", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Customer postPerson(@RequestBody Customer customer){
-
         // den gør at personen bliver gemt ned i repository'et
         // save == TROR den kigger på om den er der i forvejen
-        return customerRepository.save(customer);
+
+        Optional<Customer> optionalCustomer = Optional.ofNullable(customerRepository.findByEmail(customer.getEmail()));
+
+        if(optionalCustomer.isEmpty()){
+            System.out.println("der er ikke nogen i db");
+            return customerRepository.save(customer);
+        }
+
+        return new Customer(0);
+
     }
+
+
+
 
 
 
