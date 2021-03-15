@@ -4,12 +4,10 @@ import com.example.gruppe10.models.users.Customer;
 import com.example.gruppe10.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(value = "*")
 public class CustomerRESTController {
 
     // Autowired implementerer interfacet og opretter en instans af implementationen som gemmes i customerRepository
