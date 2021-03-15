@@ -5,11 +5,29 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
-@Entity
-// siger vi for at lægge alle User-klasser i én tabel
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+/*
+@Entity == vi laver en entitet som skal lægges i db (en ny tabel)
 
-@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames={"id_user","email"}))
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) ==
+    siger vi for at lægge alle User-klasser i én tabel - pga. nedarv
+    Når man har flere entities i én tabel, opretter den automatisk en dtype kolonne (datatype)
+    Derfor skriver vi fx @DiscriminatorValue("staff") i Staff-klassen som nedarver fra User, for at komme værdien "staff"
+    ind i dtype kolonnen.
+
+Med @DiscriminatorColumn(name = "type") ==
+    Vi omdøber dtype-kolonnens navn til type
+
+@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames={"id_user","email"})) ==
+
+*/
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
+
+// TODO denne virker ikke so far
+@Table(name="users") // vi kan også sætte UQ kolonner her: uniqueConstraints=@UniqueConstraint(columnNames={"email"})))
 
 public class User {
     // attributter
@@ -19,10 +37,9 @@ public class User {
     @Column(name="id_user")
     private int id;
     @NotNull
-    private int type;
-    @NotNull
     private String name;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private String password;
@@ -31,9 +48,8 @@ public class User {
     public User() {
     }
 
-    public User(int id, int type, String name, String email, String password) {
+    public User(int id, String name, String email, String password) {
         this.id = id;
-        this.type = type;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -45,7 +61,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", type=" + type +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -58,12 +73,6 @@ public class User {
     }
     public void setId(int id) {
         this.id = id;
-    }
-    public int getType() {
-        return type;
-    }
-    public void setType(int type) {
-        this.type = type;
     }
     public String getName() {
         return name;
