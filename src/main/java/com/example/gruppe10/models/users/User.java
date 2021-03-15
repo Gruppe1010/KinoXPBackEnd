@@ -1,4 +1,4 @@
-package com.example.gruppe10.models;
+package com.example.gruppe10.models.users;
 
 public class User {
 
