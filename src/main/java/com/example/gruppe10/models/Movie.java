@@ -8,13 +8,15 @@ import java.util.Set;
 
 @Entity
 @Table(name="movies")
-public class Movie {
+public class Movie implements Comparable<Movie>{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     @Column(name="id_movie")
     private int id;
+    @NotNull
+    private boolean active;
     @NotNull
     @Column(unique = true)
     private String title;
@@ -39,6 +41,7 @@ public class Movie {
     }
     
     public Movie(String title, Date premiereDate, Date yearOfRelease, String length, int ageLimit, Set<Showing> show, byte[] moviePoster) {
+        this.active = true;
         this.title = title;
         this.premiereDate = premiereDate;
         this.yearOfRelease = yearOfRelease;
@@ -54,6 +57,14 @@ public class Movie {
     
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public boolean isActive() {
+        return active;
+    }
+    
+    public void setActive(boolean active) {
+        this.active = active;
     }
     
     public String getTitle() {
@@ -118,5 +129,15 @@ public class Movie {
     
     public void setBase64(String base64) {
         this.base64 = base64;
+    }
+    
+    @Override
+    public int compareTo(Movie o) {
+        if(premiereDate.before(o.getPremiereDate())){
+            return -1;
+        } else if(premiereDate.after(o.getPremiereDate())){
+            return 1;
+        }
+        return 0;
     }
 }
