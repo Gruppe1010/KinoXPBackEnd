@@ -52,16 +52,9 @@ public class CustomerRESTController {
     public User findUser(@RequestParam("email") String email, @RequestParam("password") String password){
     
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmailAndPassword(email, password));
-    
-    
-        if(optionalUser.isPresent()){
-            return optionalUser.get();
-        }
-    
-        return new User(0);
-        
-        //return optionalUser.orElseGet(() -> new User(0));
-    
+
+
+        return optionalUser.orElseGet(() -> new User(0));
     }
 
 
