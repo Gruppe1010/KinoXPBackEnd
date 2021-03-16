@@ -1,7 +1,6 @@
 package com.example.gruppe10.controllers;
 
 import com.example.gruppe10.models.Movie;
-import com.example.gruppe10.models.wrappers.MovieWrapper;
 import com.example.gruppe10.repositories.CustomerRepository;
 import com.example.gruppe10.repositories.MovieRepository;
 import net.minidev.json.JSONValue;
