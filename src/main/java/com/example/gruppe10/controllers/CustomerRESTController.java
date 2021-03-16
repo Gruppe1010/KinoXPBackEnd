@@ -48,7 +48,7 @@ public class CustomerRESTController {
 
     }
     
-    @GetMapping("/customers?email={email}&password={password}")
+    @GetMapping("/customers")
     public User findUser(@RequestParam("email") String email, @RequestParam("password") String password){
     
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmailAndPassword(email, password));
