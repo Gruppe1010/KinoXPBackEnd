@@ -6,7 +6,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name="bookings",uniqueConstraints=@UniqueConstraint(columnNames={"id_booking"}))
+@Table(name="bookings")
 public class Booking {
 
     @Id

@@ -20,10 +20,7 @@ public class CustomerRESTController {
     
     @Autowired
     UserRepository userRepository;
-
-
-
-
+    
     // nu skal den indsætte en person i vores db
     /* Han vil have at vi bruger postman her til at teste denne postmapping
 
@@ -52,14 +49,8 @@ public class CustomerRESTController {
     public User findUser(@RequestParam("email") String email, @RequestParam("password") String password){
     
         Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmailAndPassword(email, password));
-
-
+        
         return optionalUser.orElseGet(() -> new User(0));
     }
-
-
-
-
-
-
+    
 }
