@@ -20,21 +20,14 @@ public class MovieRESTController {
     
     @GetMapping("/movies")
     public ArrayList<Movie> findActiveMovies(){
-        return movieRepository.findMovieByActive(true);
-        
-        
-        
-        
-        /*Optional<ArrayList<Movie>> optionalActiveMovieList = Optional.ofNullable(movieRepository.findMovieByActive(true));
+        Optional<ArrayList<Movie>> optionalActiveMovieList = Optional.ofNullable(movieRepository.findMovieByActive(true));
         if(optionalActiveMovieList.isPresent()) {
-    
             ArrayList<Movie> movieArrayList = optionalActiveMovieList.get();
-    
-            List<Movie> filteredList = optionalActiveMovieList.stream() .filter(Optional::isPresent) .map(Optional::get) .collect(Collectors.toList());
             
-            return Collections.sort(movieArrayList);
+            Collections.sort(movieArrayList);
+            return movieArrayList;
         }
-        return new ArrayList<Movie>();*/
+        return new ArrayList<Movie>();
     }
 }
 
