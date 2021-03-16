@@ -1,8 +1,10 @@
 package com.example.gruppe10.controllers;
 
 import com.example.gruppe10.models.Movie;
+import com.example.gruppe10.models.wrappers.MovieWrapper;
 import com.example.gruppe10.repositories.CustomerRepository;
 import com.example.gruppe10.repositories.MovieRepository;
+import net.minidev.json.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +27,17 @@ public class MovieRESTController {
             ArrayList<Movie> movieArrayList = optionalActiveMovieList.get();
             
             Collections.sort(movieArrayList);
+
+            /*
+            String jsonText = JSONValue.toJSONString(movieArrayList);
+            System.out.println(jsonText);
+
+             */
+
+
             return movieArrayList;
         }
-        return new ArrayList<Movie>();
+        return new ArrayList<>();
     }
 }
 

@@ -42,7 +42,6 @@ public class CustomerRESTController {
         }
 
         return new Customer(0);
-
     }
     
     @GetMapping("/customers")
