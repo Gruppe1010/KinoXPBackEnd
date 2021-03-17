@@ -45,6 +45,8 @@ public class MovieRESTController {
         // vi tjekker om der allerede findes en movie med titlen, fordi der må kun findes én movie med titlen
         Optional<Movie> optionalMovie = Optional.ofNullable(movieRepository.findByTitle(movie.getTitle()));
 
+        System.out.println(movie.getPremiereDate());
+
         if(optionalMovie.isEmpty()){
             System.out.println("der er ikke nogen i db");
             return movieRepository.save(movie);
