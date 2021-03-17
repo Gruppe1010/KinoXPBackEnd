@@ -24,8 +24,7 @@ public class Movie implements Comparable<Movie>{
     @Temporal(TemporalType.DATE) //Ændrer typen fra DateTime til Date i MySQL databasen
     private Date premiereDate;
     @NotNull
-    @Temporal(TemporalType.DATE)
-    private Date yearOfRelease;
+    private int yearOfRelease;
     @NotNull
     private String length;
     @NotNull
@@ -43,7 +42,7 @@ public class Movie implements Comparable<Movie>{
         this.id = id;
     }
 
-    public Movie(String title, Date premiereDate, Date yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
+    public Movie(String title, Date premiereDate, int yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
         this.active = true;
         this.title = title;
         this.premiereDate = premiereDate;
@@ -78,10 +77,10 @@ public class Movie implements Comparable<Movie>{
     public void setPremiereDate(Date premiereDate) {
         this.premiereDate = premiereDate;
     }
-    public Date getYearOfRelease() {
+    public int getYearOfRelease() {
         return yearOfRelease;
     }
-    public void setYearOfRelease(Date yearOfRelease) {
+    public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
     }
     public String getLength() {
