@@ -13,5 +13,9 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     
     @Query("SELECT movies FROM Movie movies WHERE movies.active = ?1")
     ArrayList<Movie> findMovieByActive(boolean active);
+
+
+    @Query("SELECT movies FROM Movie movies WHERE movies.title = ?1")
+    Movie findByTitle(String title);
     
 }

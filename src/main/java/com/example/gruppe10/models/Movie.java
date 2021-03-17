@@ -32,15 +32,18 @@ public class Movie implements Comparable<Movie>{
     private int ageLimit;
     @OneToMany(mappedBy = "movie")
     private Set<Showing> show;
-    @Column(columnDefinition="LONGBLOB")
-    private byte[] moviePoster;
-    @Transient
+    @NotNull
+    @Column(name="base64", columnDefinition = "TEXT")
     private String base64;
     
     public Movie() {
     }
-    
-    public Movie(String title, Date premiereDate, Date yearOfRelease, String length, int ageLimit, Set<Showing> show, byte[] moviePoster) {
+
+    public Movie(int id) {
+        this.id = id;
+    }
+
+    public Movie(String title, Date premiereDate, Date yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
         this.active = true;
         this.title = title;
         this.premiereDate = premiereDate;
@@ -48,85 +51,60 @@ public class Movie implements Comparable<Movie>{
         this.length = length;
         this.ageLimit = ageLimit;
         this.show = show;
-        this.moviePoster = moviePoster;
+        this.base64 = base64;
     }
     
     public int getId() {
         return id;
     }
-    
     public void setId(int id) {
         this.id = id;
     }
-    
     public boolean isActive() {
         return active;
     }
-    
     public void setActive(boolean active) {
         this.active = active;
     }
-    
     public String getTitle() {
         return title;
     }
-    
     public void setTitle(String title) {
         this.title = title;
     }
-    
     public Date getPremiereDate() {
         return premiereDate;
     }
-    
     public void setPremiereDate(Date premiereDate) {
         this.premiereDate = premiereDate;
     }
-    
     public Date getYearOfRelease() {
         return yearOfRelease;
     }
-    
     public void setYearOfRelease(Date yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
     }
-    
     public String getLength() {
         return length;
     }
-    
     public void setLength(String length) {
         this.length = length;
     }
-    
     public int getAgeLimit() {
         return ageLimit;
     }
-    
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
     }
-    
     public Set<Showing> getShow() {
         return show;
     }
-    
     public void setShow(Set<Showing> show) {
         this.show = show;
     }
-    
-    public byte[] getMoviePoster() {
-        return moviePoster;
-    }
-    
-    public void setMoviePoster(byte[] moviePoster) {
-        this.moviePoster = moviePoster;
-    }
-    
     public String getBase64() {
         return base64;
     }
-    
     public void setBase64(String base64) {
         this.base64 = base64;
     }
