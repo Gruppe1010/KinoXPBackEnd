@@ -24,9 +24,7 @@ Med @DiscriminatorColumn(name = "type") ==
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type")
 
-// TODO denne virker ikke so far
 @Table(name="users") // vi kan også sætte UQ kolonner her: uniqueConstraints=@UniqueConstraint(columnNames={"email"})))
 
 public class User {
@@ -36,6 +34,8 @@ public class User {
     @NotNull
     @Column(name="id_user")
     private int id;
+    @NotNull
+    private int type;
     @NotNull
     private String name;
     @NotNull
@@ -52,8 +52,9 @@ public class User {
         this.id = id;
     }
 
-    public User(int id, String name, String email, String password) {
+    public User(int id, int type, String name, String email, String password) {
         this.id = id;
+        this.type = type;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -65,6 +66,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", type=" + type +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
@@ -77,6 +79,12 @@ public class User {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public int getType() {
+        return type;
+    }
+    public void setType(int type) {
+        this.type = type;
     }
     public String getName() {
         return name;

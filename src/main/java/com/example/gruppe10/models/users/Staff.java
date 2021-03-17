@@ -12,6 +12,6 @@ public class Staff extends User {
     public Staff() {}
     
     public Staff(int id, String name, String email, String password) {
-        super(id, name, email, password);
+        super(id, 2, name, email, password);
     }
 }
