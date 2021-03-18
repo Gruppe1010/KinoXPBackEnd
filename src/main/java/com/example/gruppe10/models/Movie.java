@@ -22,7 +22,7 @@ public class Movie implements Comparable<Movie>{
     private String title;
     @NotNull
     @Temporal(TemporalType.DATE) //Ændrer typen fra DateTime til Date i MySQL databasen
-    private Date premiereDate;
+    private Date premiere;
     @NotNull
     private int yearOfRelease;
     @NotNull
@@ -32,7 +32,7 @@ public class Movie implements Comparable<Movie>{
     @OneToMany(mappedBy = "movie")
     private Set<Showing> show;
     @NotNull
-    @Column(name="base64", columnDefinition = "TEXT")
+    @Column(name="base64", columnDefinition = "LONGTEXT")
     private String base64;
     
     public Movie() {
@@ -42,10 +42,10 @@ public class Movie implements Comparable<Movie>{
         this.id = id;
     }
 
-    public Movie(String title, Date premiereDate, int yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
+    public Movie(String title, Date premiere, int yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
         this.active = true;
         this.title = title;
-        this.premiereDate = premiereDate;
+        this.premiere = premiere;
         this.yearOfRelease = yearOfRelease;
         this.length = length;
         this.ageLimit = ageLimit;
@@ -71,11 +71,11 @@ public class Movie implements Comparable<Movie>{
     public void setTitle(String title) {
         this.title = title;
     }
-    public Date getPremiereDate() {
-        return premiereDate;
+    public Date getPremiere() {
+        return premiere;
     }
-    public void setPremiereDate(Date premiereDate) {
-        this.premiereDate = premiereDate;
+    public void setPremiere(Date premiereDate) {
+        this.premiere = premiereDate;
     }
     public int getYearOfRelease() {
         return yearOfRelease;
@@ -110,9 +110,9 @@ public class Movie implements Comparable<Movie>{
     
     @Override
     public int compareTo(Movie o) {
-        if(premiereDate.before(o.getPremiereDate())){
+        if(premiere.before(o.getPremiere())){
             return -1;
-        } else if(premiereDate.after(o.getPremiereDate())){
+        } else if(premiere.after(o.getPremiere())){
             return 1;
         }
         return 0;
