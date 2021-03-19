@@ -1,5 +1,6 @@
 package com.example.gruppe10.models;
 
+import com.example.gruppe10.models.users.Customer;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -29,8 +30,8 @@ public class Movie implements Comparable<Movie>{
     private String length;
     @NotNull
     private int ageLimit;
-    @OneToMany(mappedBy = "movie")
-    private Set<Showing> show;
+    @ElementCollection
+    private Set<String> uniqueTimeSlots;
     @NotNull
     @Column(name="base64", columnDefinition = "LONGTEXT")
     private String base64;
@@ -42,17 +43,7 @@ public class Movie implements Comparable<Movie>{
         this.id = id;
     }
 
-    public Movie(String title, Date premiere, int yearOfRelease, String length, int ageLimit, Set<Showing> show, String base64) {
-        this.active = true;
-        this.title = title;
-        this.premiere = premiere;
-        this.yearOfRelease = yearOfRelease;
-        this.length = length;
-        this.ageLimit = ageLimit;
-        this.show = show;
-        this.base64 = base64;
-    }
-    
+
     public int getId() {
         return id;
     }
@@ -95,11 +86,11 @@ public class Movie implements Comparable<Movie>{
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
     }
-    public Set<Showing> getShow() {
-        return show;
+    public Set<String> getUniqueTimeSlots() {
+        return uniqueTimeSlots;
     }
-    public void setShow(Set<Showing> show) {
-        this.show = show;
+    public void setUniqueTimeSlots(Set<String> uniqueTimeSlots) {
+        this.uniqueTimeSlots = uniqueTimeSlots;
     }
     public String getBase64() {
         return base64;

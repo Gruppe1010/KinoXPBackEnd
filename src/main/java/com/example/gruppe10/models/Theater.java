@@ -1,5 +1,5 @@
-package com.example.gruppe10.models;
 
+import com.example.gruppe10.models.Calendar;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -21,6 +21,10 @@ public class Theater {
     @NotNull
     private int seatsPrRow;
 
+    @NotNull
+    @JoinColumn(name="id_calendar", nullable = false)
+    private Calendar calendar;
+
 
 
 
@@ -28,3 +32,10 @@ public class Theater {
 
 
 }
+
+
+
+
+
+
+
