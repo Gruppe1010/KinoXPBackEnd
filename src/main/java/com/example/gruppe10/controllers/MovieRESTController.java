@@ -21,7 +21,7 @@ public class MovieRESTController {
         if(optionalActiveMovieList.isPresent()) {
             ArrayList<Movie> movieArrayList = optionalActiveMovieList.get();
             
-           // Collections.sort(movieArrayList);
+            Collections.sort(movieArrayList);
             
             return movieArrayList;
         }

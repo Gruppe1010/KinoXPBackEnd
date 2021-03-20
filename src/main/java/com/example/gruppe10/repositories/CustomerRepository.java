@@ -4,6 +4,7 @@ import com.example.gruppe10.models.users.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+// <Type, typePåPrimaryKey>, så fordi id'et er en int skal det være Integer
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 

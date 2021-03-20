@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+// <Type, typePåPrimaryKey>, så fordi id'et er en int skal det være Integer
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     
     @Query("SELECT movies FROM Movie movies WHERE movies.active = ?1")
