@@ -1,7 +1,9 @@
 package com.example.gruppe10.controllers;
 
 import com.example.gruppe10.models.Movie;
+import com.example.gruppe10.models.UniqueTimeSlot;
 import com.example.gruppe10.repositories.MovieRepository;
+import com.example.gruppe10.repositories.UniqueTimeSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,7 @@ public class MovieRESTController {
         }
         return new ArrayList<>();
     }
+
 
     @PostMapping(value="/movies", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)

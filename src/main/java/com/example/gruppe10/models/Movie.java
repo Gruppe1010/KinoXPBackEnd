@@ -30,8 +30,8 @@ public class Movie implements Comparable<Movie>{
     private String length;
     @NotNull
     private int ageLimit;
-    @ElementCollection
-    private Set<String> uniqueTimeSlots;
+    @OneToMany(mappedBy="movie")
+    private Set<UniqueTimeSlot> uniqueTimeSlots;
     @NotNull
     @Column(name="base64", columnDefinition = "LONGTEXT")
     private String base64;
@@ -86,10 +86,10 @@ public class Movie implements Comparable<Movie>{
     public void setAgeLimit(int ageLimit) {
         this.ageLimit = ageLimit;
     }
-    public Set<String> getUniqueTimeSlots() {
+    public Set<UniqueTimeSlot> getUniqueTimeSlots() {
         return uniqueTimeSlots;
     }
-    public void setUniqueTimeSlots(Set<String> uniqueTimeSlots) {
+    public void setUniqueTimeSlots(Set<UniqueTimeSlot> uniqueTimeSlots) {
         this.uniqueTimeSlots = uniqueTimeSlots;
     }
     public String getBase64() {
@@ -98,7 +98,8 @@ public class Movie implements Comparable<Movie>{
     public void setBase64(String base64) {
         this.base64 = base64;
     }
-    
+
+
     @Override
     public int compareTo(Movie o) {
         if(premiere.before(o.getPremiere())){
