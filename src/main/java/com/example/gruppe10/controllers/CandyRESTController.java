@@ -23,11 +23,13 @@ public class CandyRESTController {
 
     @GetMapping("/candy")
     //@ResponseStatus(HttpStatus.FOUND)
-    public List<Candy> postAllCandy(){
+    public ArrayList<Candy> findAllCandy(){
 
         ArrayList<Candy> candyList = (ArrayList<Candy>) candyRepository.findAll();
 
         Collections.sort(candyList);
+
+        System.out.println(candyList);
 
         return candyList;
     }
