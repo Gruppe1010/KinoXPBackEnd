@@ -22,14 +22,18 @@ public class UniqueTimeSlotRESTController {
 
     //movies?year=${year}&month=${month}
     @GetMapping("/uniqueTimeSlots")
-    public List<UniqueTimeSlot> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
+    public Set<UniqueTimeSlot> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
 
-        String likeString = "%year" + year + "month" + month + "%"; // String.format("\%year%dmonth%d%", year, month);
-        System.out.println("likeString : " + likeString);
+        String monthString = Integer.toString(month);
 
-        List<UniqueTimeSlot> uniqueTimeSlots = (List<UniqueTimeSlot>) uniqueTimeSlotRepository.findAll();
+        if(month < 10){
+            monthString = "0" + monthString;
+        }
 
-        // List<UniqueTimeSlot> uniqueTimeSlots = (List<UniqueTimeSlot>) uniqueTimeSlotRepository.findBookedTimeSlots(likeString);
+        String likeString = "%year" + year + "month" + monthString + "%"; // String.format("\%year%dmonth%d%", year, month);
+
+
+        Set<UniqueTimeSlot> uniqueTimeSlots = uniqueTimeSlotRepository.findBookedTimeSlots(likeString);
 
         System.out.println("uniqueTimeSlots: " + uniqueTimeSlots);
 
