@@ -19,6 +19,7 @@ public class UniqueTimeSlot {
     @Column(unique = true)
     private String uniqueTimeSlot;
 
+    // TODO Gør så denne ikke bliver hentet med!
     @ManyToOne
     @JoinColumn(name="id_movie", nullable = false)
     private Movie movie;
