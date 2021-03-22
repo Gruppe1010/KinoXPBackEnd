@@ -22,6 +22,9 @@ public class UniqueTimeSlot {
     @JoinColumn(name="id_movie", nullable = false)
     private Movie movie;
 
+    //@Transient
+    //private int idMovie;
+
     public UniqueTimeSlot() {
     }
 
@@ -43,6 +46,32 @@ public class UniqueTimeSlot {
     public void setUniqueTimeSlot(String uniqueTimeSlot) {
         this.uniqueTimeSlot = uniqueTimeSlot;
     }
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    @Override
+    public String toString() {
+        return "UniqueTimeSlot{" +
+                "id=" + id +
+                ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
+                ", movie=" + movie.getId() +
+                '}';
+    }
+
+
+    /*
+    public int getIdMovie() {
+        return idMovie;
+    }
+
+    public void setIdMovie(int idMovie) {
+        this.idMovie = idMovie;
+    }
 
     @Override
     public String toString() {
@@ -50,6 +79,9 @@ public class UniqueTimeSlot {
                 "id=" + id +
                 ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
                 ", movie=" + movie +
+                ", idMovie=" + idMovie +
                 '}';
     }
+
+ */
 }

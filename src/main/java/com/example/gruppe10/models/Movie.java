@@ -21,7 +21,7 @@ public class Movie implements Comparable<Movie>{
     @NotNull
     @Column(unique = true)
     private String title;
-    @NotNull
+    // TODO tilføj premieredag
     @Temporal(TemporalType.DATE) //Ændrer typen fra DateTime til Date i MySQL databasen
     private Date premiere;
     @NotNull
@@ -98,6 +98,7 @@ public class Movie implements Comparable<Movie>{
     public void setBase64(String base64) {
         this.base64 = base64;
     }
+
 
 
     @Override

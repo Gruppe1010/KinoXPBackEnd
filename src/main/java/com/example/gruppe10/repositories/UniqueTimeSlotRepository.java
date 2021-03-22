@@ -6,6 +6,7 @@ import com.example.gruppe10.models.users.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Set;
 
 // <Type, typePåPrimaryKey>, så fordi id'et er en int skal det være Integer
