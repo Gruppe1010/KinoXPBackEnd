@@ -48,26 +48,10 @@ public class UniqueTimeSlotRESTController {
         System.out.println("uniqueTimeSlots: " + uniqueTimeSlots);
         return stringSet;
     }
-    /*
-    public Set<UniqueTimeSlot> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
-
-        String monthString = Integer.toString(month);
-
-        if(month < 10){
-            monthString = "0" + monthString;
-        }
-
-        String likeString = "%year" + year + "month" + monthString + "%"; // String.format("\%year%dmonth%d%", year, month);
-
-        Set<UniqueTimeSlot> uniqueTimeSlots = (Set<UniqueTimeSlot>) uniqueTimeSlotRepository.findBookedTimeSlots(likeString);
 
 
-        return uniqueTimeSlots;
-    }
 
-     */
-
-    /*
+/*
     @PostMapping(value="/unique-time-slots", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public List<UniqueTimeSlot> createTimeSlots(@RequestBody UniqueTimeSlot[] array){
@@ -92,7 +76,9 @@ public class UniqueTimeSlotRESTController {
 
     }
 
-     */
+ */
+
+
 
 
 

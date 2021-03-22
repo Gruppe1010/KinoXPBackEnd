@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name="unique_time_slots")
 public class UniqueTimeSlot {
 
+    //attributter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -21,13 +22,12 @@ public class UniqueTimeSlot {
     @ManyToOne
     @JoinColumn(name="id_movie", nullable = false)
     private Movie movie;
+    @Transient
+    private int idMovie;
 
-    //@Transient
-    //private int idMovie;
-
+    // constructors
     public UniqueTimeSlot() {
     }
-
     public UniqueTimeSlot(int id) {
         this.id = id;
     }
@@ -49,9 +49,14 @@ public class UniqueTimeSlot {
     public Movie getMovie() {
         return movie;
     }
-
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+    public int getIdMovie() {
+        return idMovie;
+    }
+    public void setIdMovie(int idMovie) {
+        this.idMovie = idMovie;
     }
 
     @Override
@@ -64,24 +69,9 @@ public class UniqueTimeSlot {
     }
 
 
-    /*
-    public int getIdMovie() {
-        return idMovie;
-    }
 
-    public void setIdMovie(int idMovie) {
-        this.idMovie = idMovie;
-    }
 
-    @Override
-    public String toString() {
-        return "UniqueTimeSlot{" +
-                "id=" + id +
-                ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
-                ", movie=" + movie +
-                ", idMovie=" + idMovie +
-                '}';
-    }
 
- */
+
+
 }
