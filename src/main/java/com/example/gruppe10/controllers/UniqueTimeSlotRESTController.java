@@ -18,11 +18,11 @@ public class UniqueTimeSlotRESTController {
 
     @Autowired
     UniqueTimeSlotRepository uniqueTimeSlotRepository;
-    /*
+
     @Autowired
     MovieRepository movieRepository;
 
-     */
+
 
 
 
@@ -50,32 +50,52 @@ public class UniqueTimeSlotRESTController {
 
 
 
-/*
+    /*
+    * The @RequestBody annotation allows us to retrieve the request's body.
+    * We can then return it as a String or deserialize it into a Plain Old Java Object (POJO).
+    * https://stackabuse.com/get-http-post-body-in-spring/
+    * */
     @PostMapping(value="/unique-time-slots", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<UniqueTimeSlot> createTimeSlots(@RequestBody UniqueTimeSlot[] array){
+    public void createTimeSlots(@RequestBody UniqueTimeSlot[] array){
 
         List<UniqueTimeSlot> list = new ArrayList<>();
+
+        Movie movie = movieRepository.findById(array[0].getIdMovie()).get();
 
 
         for(UniqueTimeSlot u : array){
 
-            //u.setMovie(movieRepository.findById(u.getIdMovie()).get());
+            /* i vores fetch sætter vi idMovie-attributten
+            Her henter vi så det rigtige movie-obj ud fra id'et og sætter det på UniqueTimeSlot's movie-attribut
+            Det SKAL vi gøre, fordi den har oneToMany-relationen og via movie-attributten danner id_movie-kolonnen i UniqueTimeSlots tabel
+             */
 
+
+            u.setMovie(movie);
+
+            System.out.println(u);
             uniqueTimeSlotRepository.save(u);
+
             list.add(u);
-            //System.out.println(u);
+            System.out.println(u);
         }
+
+/*
+        // vi fjerner movie'en igen fordi vi skal sende listen tilbage, og vi kommer til at få en uendelig loop
+        u.setMovie(null);
+
+ */
 
         System.out.println(list);
 
-        return list;
+        // return list;
 
         //return uniqueTimeSlotRepository.save(list);
 
     }
 
- */
+
 
 
 

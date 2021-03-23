@@ -21,7 +21,7 @@ public class UniqueTimeSlot {
 
     // TODO Gør så denne ikke bliver hentet med!
     @ManyToOne
-    @JoinColumn(name="id_movie", nullable = false)
+    @JoinColumn(name="id_movie")//, nullable = false)
     private Movie movie;
     @Transient
     private int idMovie;
@@ -65,7 +65,7 @@ public class UniqueTimeSlot {
         return "UniqueTimeSlot{" +
                 "id=" + id +
                 ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
-                ", movie=" + movie.getId() +
+                ", movie="  +
                 '}';
     }
 
