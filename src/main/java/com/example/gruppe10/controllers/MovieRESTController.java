@@ -22,8 +22,12 @@ public class MovieRESTController {
         Optional<ArrayList<Movie>> optionalActiveMovieList = Optional.ofNullable(movieRepository.findMovieByActive(true));
         if(optionalActiveMovieList.isPresent()) {
             ArrayList<Movie> movieArrayList = optionalActiveMovieList.get();
-            
-            // Collections.sort(movieArrayList);
+
+            for(Movie movie : movieArrayList){
+                movie.setUniqueTimeSlots(null);
+            }
+
+            Collections.sort(movieArrayList);
             
             return movieArrayList;
         }
@@ -31,6 +35,7 @@ public class MovieRESTController {
     }
 
 
+    // til når vi opretter en movie
     @PostMapping(value="/movies", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public Movie postMovie(@RequestBody Movie movie){
