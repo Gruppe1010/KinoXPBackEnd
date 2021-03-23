@@ -34,7 +34,7 @@ public class UniqueTimeSlotRESTController {
 
     //movies?year=${year}&month=${month}
     @GetMapping("/unique-time-slots")
-    public Set<String> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
+    public Set<UniqueTimeSlot> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
 
         String monthString = Integer.toString(month);
         if(month < 10){
@@ -44,24 +44,25 @@ public class UniqueTimeSlotRESTController {
         String likeString = "%year" + year + "month" + monthString + "%"; // String.format("\%year%dmonth%d%", year, month);
         Set<UniqueTimeSlot> uniqueTimeSlots = uniqueTimeSlotRepository.findBookedTimeSlots(likeString);
 
+        for(UniqueTimeSlot u : uniqueTimeSlots){
+            u.setMovie(null);
+        }
         // tilføjelse efter i går
-        Set<String> stringSet = new HashSet<>();
-
+        //Set<String> stringSet = new HashSet<>();
+        /*
         for(UniqueTimeSlot u : uniqueTimeSlots){
             stringSet.add(u.getUniqueTimeSlot());
         }
+         */
 
-        return stringSet;
+        return uniqueTimeSlots;
     }
 
     @GetMapping("/unique-time-slots/id-movie/{idMovie}")
     public Set<String> findBookedTimeSlotsFromMovieId(@PathVariable int idMovie){
         
         Set<UniqueTimeSlot> uniqueTimeSlots = uniqueTimeSlotRepository.findBookedTimeSlotsFromMovieId(idMovie);
-    
-        System.out.println("UniqueTimeSlots" + uniqueTimeSlots);
-    
-        // tilføjelse efter i går
+        
         Set<String> stringSet = new HashSet<>();
     
         for(UniqueTimeSlot u : uniqueTimeSlots){

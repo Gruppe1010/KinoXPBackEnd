@@ -25,6 +25,9 @@ public class UniqueTimeSlot {
     private Movie movie;
     @Transient
     private int idMovie;
+    
+    
+    
 
     // constructors
     public UniqueTimeSlot() {
