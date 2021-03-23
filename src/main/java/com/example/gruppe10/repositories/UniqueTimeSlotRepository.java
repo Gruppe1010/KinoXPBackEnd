@@ -13,20 +13,21 @@ import java.util.Set;
 public interface UniqueTimeSlotRepository extends JpaRepository<UniqueTimeSlot, Integer> {
 
     /*
-    @Query("SELECT movies FROM Movie movies WHERE movies.active = ?1")
-    ArrayList<Movie> findMovieByActive(boolean active);
 
-
-    @Query("SELECT movies FROM Movie movies WHERE movies.title = ?1")
-    Movie findByTitle(String title);
-
+        @Query("SELECT movie FROM Movie movie JOIN movie.uniqueTimeSlots u WHERE u LIKE :likeString")
+        String findBookedTimeSlots(String likeString);
      */
-
-
+    
     // "SELECT s FROM Student s JOIN s.skillTags t WHERE t.name = LOWER(:tagName) AND t.value > :tagValue")
 
     @Query("SELECT uniqueTimeSlot FROM UniqueTimeSlot uniqueTimeSlot WHERE uniqueTimeSlot.uniqueTimeSlot LIKE ?1")
     Set<UniqueTimeSlot> findBookedTimeSlots(String likeString);
+    
+    
+    @Query("SELECT uniqueTimeSlot FROM UniqueTimeSlot uniqueTimeSlot  WHERE id_movie = ?1")
+    Set<UniqueTimeSlot> findBookedTimeSlotsFromMovieId(int idMovie);
+    
+    
 
 
 

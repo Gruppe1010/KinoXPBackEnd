@@ -29,6 +29,7 @@ public class UniqueTimeSlotRESTController {
 
 
 
+ // const url = `http://localhost:8080/unique-time-slots?idMovie=${movie.id}`;
 
 
     //movies?year=${year}&month=${month}
@@ -53,6 +54,22 @@ public class UniqueTimeSlotRESTController {
         return stringSet;
     }
 
+    @GetMapping("/unique-time-slots/id-movie/{idMovie}")
+    public Set<String> findBookedTimeSlotsFromMovieId(@PathVariable int idMovie){
+        
+        Set<UniqueTimeSlot> uniqueTimeSlots = uniqueTimeSlotRepository.findBookedTimeSlotsFromMovieId(idMovie);
+    
+        System.out.println("UniqueTimeSlots" + uniqueTimeSlots);
+    
+        // tilføjelse efter i går
+        Set<String> stringSet = new HashSet<>();
+    
+        for(UniqueTimeSlot u : uniqueTimeSlots){
+            stringSet.add(u.getUniqueTimeSlot());
+        }
+    
+        return stringSet;
+    }
 
 
     /*
@@ -112,10 +129,7 @@ public class UniqueTimeSlotRESTController {
         movieRepository.updateMoviePremiere(idMovie, premiere);
 
     }
-
-
-
-
+    
     public LocalDate getDate(int weekOfMonth, int dayOfWeek, int month, int year) {
         // you can customize your week definition (first day of week and mininum days in first week)
         WeekFields wf = WeekFields.of(DayOfWeek.SUNDAY, 2);

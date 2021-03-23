@@ -48,4 +48,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
 
     
+    //@Query("SELECT unique FROM Movie unique INNER JOIN unique.uniqueTimeSlots p WHERE KEY() ")
+    
 }
