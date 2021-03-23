@@ -27,7 +27,7 @@ public class UniqueTimeSlotRESTController {
 
 
     //movies?year=${year}&month=${month}
-    @GetMapping("/uniqueTimeSlots")
+    @GetMapping("/unique-time-slots")
     public Set<String> findBookedTimeSlots(@RequestParam("year") int year, @RequestParam("month") int month){
 
         String monthString = Integer.toString(month);
@@ -45,7 +45,6 @@ public class UniqueTimeSlotRESTController {
             stringSet.add(u.getUniqueTimeSlot());
         }
 
-        System.out.println("uniqueTimeSlots: " + uniqueTimeSlots);
         return stringSet;
     }
 
