@@ -59,40 +59,18 @@ public class UniqueTimeSlotRESTController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createTimeSlots(@RequestBody UniqueTimeSlot[] array){
 
-        List<UniqueTimeSlot> list = new ArrayList<>();
-
+        // fordi vi alle de timeslots vi har fået ind skal tilknyttes den samme movie, henter vi den ud her, før forloopet
         Movie movie = movieRepository.findById(array[0].getIdMovie()).get();
 
-
         for(UniqueTimeSlot u : array){
-
             /* i vores fetch sætter vi idMovie-attributten
             Her henter vi så det rigtige movie-obj ud fra id'et og sætter det på UniqueTimeSlot's movie-attribut
             Det SKAL vi gøre, fordi den har oneToMany-relationen og via movie-attributten danner id_movie-kolonnen i UniqueTimeSlots tabel
              */
-
-
             u.setMovie(movie);
 
-            System.out.println(u);
             uniqueTimeSlotRepository.save(u);
-
-            list.add(u);
-            System.out.println(u);
         }
-
-/*
-        // vi fjerner movie'en igen fordi vi skal sende listen tilbage, og vi kommer til at få en uendelig loop
-        u.setMovie(null);
-
- */
-
-        System.out.println(list);
-
-        // return list;
-
-        //return uniqueTimeSlotRepository.save(list);
-
     }
 
 
