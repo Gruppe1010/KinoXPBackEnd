@@ -59,17 +59,17 @@ public class UniqueTimeSlotRESTController {
     }
 
     @GetMapping("/unique-time-slots/id-movie/{idMovie}")
-    public Set<String> findBookedTimeSlotsFromMovieId(@PathVariable int idMovie){
+    public Set<UniqueTimeSlot> findBookedTimeSlotsFromMovieId(@PathVariable int idMovie){
         
         Set<UniqueTimeSlot> uniqueTimeSlots = uniqueTimeSlotRepository.findBookedTimeSlotsFromMovieId(idMovie);
-        
-        Set<String> stringSet = new HashSet<>();
-    
+        System.out.println(uniqueTimeSlots);
+       
         for(UniqueTimeSlot u : uniqueTimeSlots){
-            stringSet.add(u.getUniqueTimeSlot());
+            u.setMovie(null);
         }
-    
-        return stringSet;
+        System.out.println(uniqueTimeSlots);
+       
+        return uniqueTimeSlots;
     }
 
 

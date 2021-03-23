@@ -103,6 +103,13 @@ public class Movie implements Comparable<Movie>{
 
     @Override
     public int compareTo(Movie o) {
+        if(o.getPremiere() == null && premiere != null){
+            return -1;
+        } else if(o.getPremiere() != null && premiere == null){
+            return 1;
+        }else if(o.getPremiere() == null && premiere == null){
+            return 0;
+        }
         if(premiere.before(o.getPremiere())){
             return -1;
         } else if(premiere.after(o.getPremiere())){
