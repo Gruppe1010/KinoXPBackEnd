@@ -48,7 +48,22 @@ public class CandyRESTController {
 
         return new Candy(0);
     }
-
+    
+    @PutMapping(value="/candy", consumes = "application/json")
+    public void updateCandy(@RequestBody Candy candy){
+        
+        Optional<Candy> tempCandy = candyRepository.findById(candy.getId());
+        
+        if(tempCandy.isPresent()){
+    
+            Candy updateCandy = tempCandy.get();
+            
+            updateCandy.setPrice(candy.getPrice());
+            updateCandy.setStock(candy.getStock());
+            candyRepository.save(updateCandy);
+        }
+    }
+    
 
 
 

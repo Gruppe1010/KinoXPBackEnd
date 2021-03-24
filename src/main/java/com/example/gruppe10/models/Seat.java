@@ -25,6 +25,8 @@ public class Seat {
     @JoinColumn(name="id_unique_time_slot", nullable = false)
     private UniqueTimeSlot uniqueTimeSlot;
     
+    
+    
     public Seat() {
     }
     
