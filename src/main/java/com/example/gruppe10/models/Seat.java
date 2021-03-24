@@ -20,6 +20,10 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name="id_booking", nullable = false)
     private Booking booking;
+
+    @ManyToOne
+    @JoinColumn(name="id_unique_time_slot", nullable = false)
+    private UniqueTimeSlot uniqueTimeSlot;
     
     public Seat() {
     }
@@ -42,13 +46,28 @@ public class Seat {
     public void setBooking(Booking booking) {
         this.booking = booking;
     }
-    
+    public UniqueTimeSlot getUniqueTimeSlot() {
+        return uniqueTimeSlot;
+    }
+    public void setUniqueTimeSlot(UniqueTimeSlot uniqueTimeSlot) {
+        this.uniqueTimeSlot = uniqueTimeSlot;
+    }
+
     @Override
     public String toString() {
         return "Seat{" +
                 "id=" + id +
                 ", rowAndSeat='" + rowAndSeat + '\'' +
-                ", booking=" + booking.getId() +
+                '}';
+    }
+
+
+    public String toString1() {
+        return "Seat{" +
+                "id=" + id +
+                ", rowAndSeat='" + rowAndSeat + '\'' +
+                ", booking=" + booking +
+                ", uniqueTimeSlot=" + uniqueTimeSlot +
                 '}';
     }
 }

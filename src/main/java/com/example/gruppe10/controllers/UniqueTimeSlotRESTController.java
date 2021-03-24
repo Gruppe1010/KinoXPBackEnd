@@ -46,6 +46,7 @@ public class UniqueTimeSlotRESTController {
 
         for(UniqueTimeSlot u : uniqueTimeSlots){
             u.setMovie(null);
+            u.setSeatSet(null);
         }
         // tilføjelse efter i går
         //Set<String> stringSet = new HashSet<>();
@@ -66,6 +67,7 @@ public class UniqueTimeSlotRESTController {
        
         for(UniqueTimeSlot u : uniqueTimeSlots){
             u.setMovie(null);
+            u.setSeatSet(null);
         }
         System.out.println(uniqueTimeSlots);
        

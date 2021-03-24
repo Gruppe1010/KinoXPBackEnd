@@ -4,6 +4,7 @@ import com.example.gruppe10.models.users.Customer;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="unique_time_slots")
@@ -25,9 +26,12 @@ public class UniqueTimeSlot {
     private Movie movie;
     @Transient
     private int idMovie;
+
+    @OneToMany
+    @JoinColumn(name="id_seat")
+    private Set<Seat> seatSet;
     
-    
-    
+
 
     // constructors
     public UniqueTimeSlot() {
@@ -62,13 +66,18 @@ public class UniqueTimeSlot {
     public void setIdMovie(int idMovie) {
         this.idMovie = idMovie;
     }
+    public Set<Seat> getSeatSet() {
+        return seatSet;
+    }
+    public void setSeatSet(Set<Seat> seatSet) {
+        this.seatSet = seatSet;
+    }
 
     @Override
     public String toString() {
         return "UniqueTimeSlot{" +
                 "id=" + id +
                 ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
-                ", movie="  +
                 '}';
     }
 

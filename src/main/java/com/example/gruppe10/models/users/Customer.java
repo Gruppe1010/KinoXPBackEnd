@@ -30,14 +30,14 @@ public class Customer extends User{
         super(id, 1, name, email, password);
         this.bookingList = bookingList;
     }
-    
+
     @Override
     public String toString() {
         return "Customer{" +
-                "bookingList=" + bookingList +
+                "id=" + super.getId() +
                 '}';
     }
-    
+
     //Getters og setters
     public Set<Booking> getBookingList() {
         return bookingList;
