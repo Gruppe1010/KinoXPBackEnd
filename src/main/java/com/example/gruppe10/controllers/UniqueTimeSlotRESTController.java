@@ -80,6 +80,11 @@ public class UniqueTimeSlotRESTController {
     * We can then return it as a String or deserialize it into a Plain Old Java Object (POJO).
     * https://stackabuse.com/get-http-post-body-in-spring/
     * */
+    /*Denne postMapping gør 2 ting:
+    Den tilføjer nye UniqueTimeSlot-rækker i db
+    OG den opdaterer premiere-kolonnen i movie
+     */
+
     @PostMapping(value="/unique-time-slots", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void createTimeSlots(@RequestBody UniqueTimeSlot[] array){
@@ -87,9 +92,6 @@ public class UniqueTimeSlotRESTController {
         // fordi vi alle de timeslots vi har fået ind skal tilknyttes den samme movie, henter vi den ud her, før forloopet
         int idMovie = array[0].getIdMovie();
         Movie movie = movieRepository.findById(idMovie).get();
-
-        //year2021month03week3day4 // bio
-        // 20210334
 
         int earliestDate = 999999999;
 
@@ -99,15 +101,18 @@ public class UniqueTimeSlotRESTController {
             Det SKAL vi gøre, fordi den har oneToMany-relationen og via movie-attributten danner id_movie-kolonnen i UniqueTimeSlots tabel
              */
             u.setMovie(movie);
+            u.setDate(convertDateStringToDate(deleteCharsFromUniqueTimeSlot(u.getUniqueTimeSlot())));
+
+
             uniqueTimeSlotRepository.save(u);
 
             // Her finder vi premieredatoen for filmen vi lige har oprettet,
             // ved at finde ud af hvilket af de valgte timeslot som er tidligst
 
-            // den er 8 lang - fordi den også tager row og bio-tallene med
-            String allNumbers = u.getUniqueTimeSlot().replaceAll("\\D+","");
-            // vi fjerner de sidste to tal, så vi kun får år, måned, week, dag
-            String realString = allNumbers.substring(0, allNumbers.length()-2);
+            //year2021month03week3day4 // row?bio?
+            // 20210334
+            // Vi laver uniqueTimeSlot-string-attributten om til KUN tal - minus de to sidste, som står for række og bio
+            String realString = deleteCharsFromUniqueTimeSlot(u.getUniqueTimeSlot());
 
             int dateInt = Integer.parseInt(realString);
 
@@ -120,16 +125,29 @@ public class UniqueTimeSlotRESTController {
         // "yyyy-mm-dd"
         String earliestDateString = Integer.toString(earliestDate);
 
-        int year = Integer.parseInt(earliestDateString.substring(0, 4));
-        int month = Integer.parseInt(earliestDateString.substring(4, 6));
-        int week = Integer.parseInt(earliestDateString.substring(6, 7));
-        int day = Integer.parseInt(earliestDateString.substring(7, 8));
-
-        // https://www.baeldung.com/java-date-to-localdate-and-localdatetime
-        Date premiere = java.sql.Date.valueOf(getDate(week, day, month, year));
-
+        Date premiere = convertDateStringToDate(earliestDateString);
 
         movieRepository.updateMoviePremiere(idMovie, premiere);
+    }
+
+    public Date convertDateStringToDate(String dateString){
+
+        int year = Integer.parseInt(dateString.substring(0, 4));
+        int month = Integer.parseInt(dateString.substring(4, 6));
+        int week = Integer.parseInt(dateString.substring(6, 7));
+        int day = Integer.parseInt(dateString.substring(7, 8));
+
+        // https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+        return java.sql.Date.valueOf(getDate(week, day, month, year));
+    }
+
+    public String deleteCharsFromUniqueTimeSlot(String uniqueTimeSlot){
+
+        // Vi laver uniqueTimeSlot-string-attributten om til KUN tal
+        // den er 8 lang - fordi den også tager row og bio-tallene med
+        String allNumbers = uniqueTimeSlot.replaceAll("\\D+","");
+        // vi fjerner de sidste to tal, så vi kun får år, måned, week, dag
+        return allNumbers.substring(0, allNumbers.length()-2);
 
     }
     

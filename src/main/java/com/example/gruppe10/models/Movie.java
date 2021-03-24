@@ -21,7 +21,6 @@ public class Movie implements Comparable<Movie>{
     @NotNull
     @Column(unique = true)
     private String title;
-    // TODO tilføj premieredag
     @Temporal(TemporalType.DATE) //Ændrer typen fra DateTime til Date i MySQL databasen h
     private Date premiere;
     @NotNull

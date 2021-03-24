@@ -4,6 +4,7 @@ import com.example.gruppe10.models.users.Customer;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,9 @@ public class UniqueTimeSlot {
     @OneToMany
     @JoinColumn(name="id_seat")
     private Set<Seat> seatSet;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
     
 
 
@@ -72,11 +76,18 @@ public class UniqueTimeSlot {
     public void setSeatSet(Set<Seat> seatSet) {
         this.seatSet = seatSet;
     }
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Override
     public String toString() {
         return "UniqueTimeSlot{" +
                 "id=" + id +
+                "date=" + date +
                 ", uniqueTimeSlot='" + uniqueTimeSlot + '\'' +
                 '}';
     }
