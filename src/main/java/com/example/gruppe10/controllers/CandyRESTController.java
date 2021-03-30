@@ -64,6 +64,11 @@ public class CandyRESTController {
         }
     }
     
+    @DeleteMapping(value="/candy", consumes = "application/json")
+    public void deleteCandy(@RequestBody Candy candy){
+        candyRepository.deleteById(candy.getId());
+    }
+    
 
 
 
